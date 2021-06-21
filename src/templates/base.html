@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/app.css' %}" rel="stylesheet">
+    <title> {% block title %}Here will be Title{% endblock title %}</title>
+</head>
+
+<body class="container-xl">
+    
+    {% include './header.html' %}
+
+    {% block body %}Here will be Body{% endblock body %}
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+ 
+</html>

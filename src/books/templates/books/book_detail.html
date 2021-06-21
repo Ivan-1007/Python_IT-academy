@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{object.name}}
+{% endblock title %}    
+
+{% block body %}
+    <div class="container-fluid">
+    
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">    
+                <img class="rounded mx-auto d-block img-thumbnail img-fluid"  src="{{ object.picture.url }}" alt="book_pict"> <br>
+            </div>        
+            <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+                <h2><b>id:</b> <em> {{ object.pk }} </em> | <b>name:</b> <em> {{ object.name }}({{object.pyblishing_year}}) </em> </h2>
+                <p><b>Описание:</b><br>    
+                {{ object.discription }} <br>
+                <b>Серия:</b> {{ object.series.name }} <br>                
+                <b>Переплет: </b> {{ object.get_binding_display }} <br>
+                <b>Количество страниц: </b> {{ object.pages }} <br>
+                <b>Формат: </b> {{ object.get_format_display }} <br>
+                <b>ISBN: </b> {{ object.ISBN }} <br>
+                <b>Вес: </b> {{ object.weight }} (гр) <br>
+                <b>Возрастные ограничения: </b> {{ object.age_restrictions }} <br>
+                <b>Рейтинг: </b> {{ object.rating }} <br>
+
+                </p>
+                <a class=" btn btn-outline-secondary justify-content-end text-decoration-none " href="{% url 'books:update' object.pk %}">Изменить</a>
+                <a class=" btn btn-outline-danger justify-content-end text-decoration-none " href="{% url 'books:del' object.pk %}">Удалить</a>
+            </div>
+     
+        </div>
+        
+        <div class="container">
+            <b>Автор:</b> 
+            {% for author in object.author.all %}
+                <a class="text-reset text-decoration-none link-hover" href="{% url 'dirs:author' author.pk %}"> {{author.name}} </a>
+            {% endfor %}
+            <span>  |  </span>
+            <b>Жанр:</b> 
+                {% for genre in object.genre.all %}
+                <a class="text-reset text-decoration-none link-hover" href="{% url 'dirs:genre' genre.pk %}"> {{genre.name}} </a>
+                {% endfor %}
+            <span>  |  </span>
+            <b>Издательство: </b> 
+            <a class="text-reset text-decoration-none link-hover" href="{% url 'dirs:ph' object.ph.pk %}"> {{ object.ph }}</a> 
+        </div>
+
+        <div>
+            <p class="text-end text-down"> Последнее обновление: {{ object.updated|date:'d-m-y H:i:s' }}</p>
+        </div>
+    </div>
+{% endblock body %}

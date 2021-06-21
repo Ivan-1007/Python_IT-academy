@@ -1,0 +1,62 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+    <title> Авторизация</title>
+</head>
+
+<body class="text-center">
+    <main class="form-signin">
+        <form method="post" action="{% url 'users:login' %}">
+            {% csrf_token %}
+            <img class="mb-4" src="{% static 'logo/logo.png' %}" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Авторизация
+    
+                {% if form.errors %}
+                    <p>Your username and password didn't match. Please try again.</p>
+                {% endif %}
+
+                {% if next %}
+                    {% if user.is_authenticated %}
+                    <p>Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+                    {% else %}
+                    <p>Please login to see this page.</p>
+                    {% endif %}
+                {% endif %}
+            </h1>
+
+            <div class="form-floating">
+                {{ form|crispy }}
+            </div>
+
+            
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Sign in</button>
+
+        
+
+
+
+
+
+        
+
+
+        </form>
+    </main>
+
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+ 
+</html>
+
+
+
+

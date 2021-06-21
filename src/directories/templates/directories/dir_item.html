@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{Title}}
+{% endblock title %}    
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {% if object.picture %}
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">    
+                    <img class="rounded mx-auto d-block img-thumbnail img-fluid"  src="{{ object.picture.url }}" alt="author_pict">
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">   
+            {% else %}
+                <div class="col">
+            {% endif %}
+                    <div class="d-flex bd-highlight mb-3">
+                        <div class="p-2 bd-highlight fs-3"><b>id:</b> <em> {{ object.pk }} </em> | <b>name:</b> <em> {{ object.name }} </em></div>
+                        <div class="ms-auto p-2 bd-highlight"><a class=" btn btn-outline-secondary justify-content-end text-decoration-none " href="{% url url_upd object.pk %}">Изменить</a></div>
+                        <div class=" p-2 bd-highlight"><a class="btn btn-outline-danger justify-content-end text-decoration-none" href="{% url url_del object.pk %}">Удалить</a></div>
+                    </div> 
+                    <hr> 
+                    {% if object.discription %}
+                  
+                    <p>{{ object.discription }}</p>
+                
+                    {% endif %}
+                </div>
+        </div>
+        <div class="books row"></div>
+        <br>
+        <p><button class="w-100 btn btn-outline-secondary"><a class="text-decoration-none text-reset" href="{{ back_link }}">Назад</a></button>  </p>
+        <br>
+        <div class="booklist">
+            <div class="row">
+                {% for item in object.books.all %}
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="card " >
+                            <div class="pict-wrap-book">
+                                <a href="{% url 'books:book' item.pk %}">
+                                <img src="{{ item.picture.url }}" class="card-img-top rounded pict "  alt="">
+                                </a>    
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a class="text-decoration-none text-reset txt-overflow name" href="{% url 'books:book' item.pk %}">{{ item.name }}</a></li>
+                                <li class="list-group-item txt-overflow"><span class="fs-6">Автор(ы):</span>                                    
+                                    {% for author in item.author.all %}
+                                        <a class="text-decoration-none text-reset  fs-6 link-hover" href="{% url 'dirs:author' author.pk %}"> {{author.name}} </a>
+                                    {% endfor %}
+
+                                    
+                                <li class="list-group-item">Рейтинг: {{ item.rating }} </li>
+                            </ul>
+                            <div class="price-label">{{ item.price }}BYN</div>
+                            
+                        </div>        
+                    </div>
+                {% endfor %}
+            </div>
+        
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,70 @@
+.txt-overflow {
+    overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.list-group-item {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.card .pict {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: 1s;
+}
+
+.card .pict:hover {
+    transform: scale(0.9);
+}
+
+.card .pict-wrap {
+    margin-top: 100%;
+    overflow: hidden;
+    
+}
+
+
+.card .pict-wrap-book {
+    margin-top: 140%;
+    overflow: hidden; 
+    
+}
+
+.card .price-label {
+    position: absolute;
+    left: -10px;
+    top: 5%;
+    background: #ffffff;
+    font-size: 12pt;
+    color: #1D436A;
+    border-color: dimgray;
+    border: 2px solid;
+    font-weight: bold;
+    padding: 5px 10px 5px 5px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.link-hover:hover {
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.313);
+}
+
+.user-name {
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
