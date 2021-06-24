@@ -33,7 +33,7 @@
         
         <div class="container">
             <b>Автор:</b> 
-            {% for author in object.author.all %}
+            {% for author in object.authors.all %}
                 <a class="text-reset text-decoration-none link-hover" href="{% url 'dirs:author' author.pk %}"> {{author.name}} </a>
             {% endfor %}
             <span>  |  </span>
@@ -41,9 +41,11 @@
                 {% for genre in object.genre.all %}
                 <a class="text-reset text-decoration-none link-hover" href="{% url 'dirs:genre' genre.pk %}"> {{genre.name}} </a>
                 {% endfor %}
-            <span>  |  </span>
-            <b>Издательство: </b> 
-            <a class="text-reset text-decoration-none link-hover" href="{% url 'dirs:ph' object.ph.pk %}"> {{ object.ph }}</a> 
+            {% if object.ph %}        
+                <span>  |  </span>
+                <b>Издательство: </b> 
+                <a class="text-reset text-decoration-none link-hover" href="{% url 'dirs:ph' object.ph.pk %}"> {{ object.ph }}</a> 
+            {% endif %}    
         </div>
 
         <div>

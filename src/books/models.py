@@ -26,9 +26,9 @@ class Book(models.Model):
 
     name = models.CharField(verbose_name='Имя', max_length=60, )
     discription = models.TextField(verbose_name='Описание', blank=True, null=True,)
-    picture = models.ImageField(verbose_name='Изображение', upload_to=book_directory_path, blank=True, default='Books/book0.png')
+    picture = models.ImageField(verbose_name='Изображение', upload_to=book_directory_path, blank=True, default='Books/book0')
     price = models.FloatField(verbose_name='цена (BYN)')
-    author = models.ManyToManyField(to=dirs_models.Author, related_name='books')          # Автор
+    authors = models.ManyToManyField(to=dirs_models.Author, related_name='books')          # Автор
     series = models.ForeignKey(to=dirs_models.Series, verbose_name='серия', related_name='books', blank=True, null=True, on_delete=models.PROTECT)  # Серии
     genre = models.ManyToManyField(to=dirs_models.Genre, verbose_name='жанры', related_name='books',)    # Жанр
     pyblishing_year = models.IntegerField(verbose_name='год издания', blank=True, null=True, )
