@@ -1,0 +1,26 @@
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 g-4">
+    <div class="card " >
+        <div class="wrap">
+            <a href="{% url 'books:book' book.pk %}">
+            <img src="{{ book.picture.url }}" class="card-img-top rounded pict "  alt="">
+            </a>    
+        </div>
+        <ul class="list-group list-group-flush">
+            <h5><a class="list-group-item text-decoration-none text-reset txt-overflow " href="{% url 'books:book' book.pk %}">{{ book.name }}</a></h5>
+            <li class="list-group-item txt-overflow"><span class="fs-6">Автор(ы):</span>                                    
+                {% for author in book.authors.all %}
+                    <a class="text-decoration-none text-reset  fs-6 link-hover" href="{% url 'dirs:author' author.pk %}"> {{author.name}} </a>
+                {% endfor %}
+                <br>
+
+                
+                Рейтинг: {{ book.rating }}
+                <br>
+                <a class="w-100 btn btn-success " href="{% url 'carts:cart' %}?book_id={{ book.pk }}">В корзину</a>
+            </li>
+        </ul>
+        <div class="price-label">
+            {{book.price|floatformat:2}} BYN
+        </div>
+    </div>        
+</div>

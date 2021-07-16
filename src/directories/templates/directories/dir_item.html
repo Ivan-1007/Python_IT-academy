@@ -28,34 +28,13 @@
                     {% endif %}
                 </div>
         </div>
-        <div class="books row"></div>
+        
+        
         <br>
-        <p><button class="w-100 btn btn-outline-secondary"><a class="text-decoration-none text-reset" href="{{ back_link }}">Назад</a></button>  </p>
-        <br>
-        <div class="booklist">
+        <div class="booklist mt-2">
             <div class="row">
-                {% for item in object.books.all %}
-                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card " >
-                            <div class="pict-wrap-book">
-                                <a href="{% url 'books:book' item.pk %}">
-                                <img src="{{ item.picture.url }}" class="card-img-top rounded pict "  alt="">
-                                </a>    
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a class="text-decoration-none text-reset txt-overflow name" href="{% url 'books:book' item.pk %}">{{ item.name }}</a></li>
-                                <li class="list-group-item txt-overflow"><span class="fs-6">Автор(ы):</span>                                    
-                                    {% for author in item.author.all %}
-                                        <a class="text-decoration-none text-reset  fs-6 link-hover" href="{% url 'dirs:author' author.pk %}"> {{author.name}} </a>
-                                    {% endfor %}
-
-                                    
-                                <li class="list-group-item">Рейтинг: {{ item.rating }} </li>
-                            </ul>
-                            <div class="price-label">{{ item.price }}BYN</div>
-                            
-                        </div>        
-                    </div>
+                {% for book in object.books.all %}
+                    {% include 'book_card.html' %}
                 {% endfor %}
             </div>
         

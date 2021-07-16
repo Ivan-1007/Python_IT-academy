@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+   
+   
+{% block title %}Список справочников{% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="fs-2">
+        Новые:
+    </div>
+    <hr>  
+    <div class="row border border-3 rounded pb-4">
+        {% for book in new_books %}
+            {% include 'book_card.html' %}
+
+
+        {% endfor %}
+    </div>        
+        <hr class="mt-4">  
+    <div class="fs-2">
+        Самые популярные:
+    </div>
+    <hr class="mt-2">  
+    <div class="row border border-3 rounded pb-4">
+        {% for book in popular_books %}
+        {% include 'book_card.html' %}
+
+        {% endfor %}
+    </div>
+    <br>
+
+
+
+
+
+</div>    
+{% endblock body %}
+
+dictsortreversed

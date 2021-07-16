@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Корзина
+{% endblock title %}    
+
+{% block body %}
+    <div class="container-fluid col col-lg-8 col-md-10">
+        Корзина:
+        <form action="{% url 'carts:upd_cart' %}" method="POST">
+            
+            <table class="table table-striped  ">
+                <thead>
+                    <tr>
+                        <td class="text-center"><b>№</b></td>
+                        <td class="text-center"><b>Книга</b></td>
+                        <td class="text-center"><b>Обложка</b></td>
+                        <td class="text-center"><b>Цена за шт.(BYN)</b></td>
+                        <td class="text-center"><b>Количество</b></td>
+                        <td class="text-center"><b>Цена всей позиции(BYN)</b></td>
+                        <td class="text-center"><b>Для кнопок</b></td>
+                    </tr>
+                </thead>
+                <tbody> 
+                    <form action="#" method="POST"></form>
+                    {% for book in object.books_in_cart.all %}
+                        <tr>
+                            <td class="text-center">{{forloop.counter}}</th>
+                            <td class="text-center"><a class="text-decoration-none text-reset txt-overflow" href="{% url 'books:book' book.book.pk %}">{{ book.book.name }}</a></td>
+                            <td class="text-center"><img src="{{ book.book.picture.url }}" alt="{{ book.book.name }}" style="width: 130px; height: auto;"></td>
+                            <td class="text-center">{{ book.unit_price }}</td>
+                            <td class="text-center">
+                                <input type="number" min="1" step="1" class="form-control" name="quantity_{{book.pk}}" value="{{ book.quantity }}" style="width: 40%; margin: auto;">
+                            </td>
+                            <td class="text-center">{{ book.total_price }}</td>
+                            <td class="text-end">
+                                <form action="{% url 'carts:del_book' book.pk %}" method="POST">{%csrf_token%} <button class="btn btn-outline-danger">Удалить</button>    </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    
+                    <tr style="border: 2px black solid">
+                        <td colspan='5' class="text-end"><b>Общая стоимость:</b></td>
+                        <td class="text-center"><b>{{ object.cart_price }}</b></td>
+                        {% csrf_token %}
+                        <td class="text-end"><button class="btn btn-outline-secondary btn-sm " value="save" name="submit" type="submit">Сохранить</button></td>
+                    </tr>
+                </tbody>
+                
+            </table> 
+                 <button class="w-100 btn btn-outline-success " value="checkout" name="submit" type="submit">Оформить заказ</button>
+        </form>
+            
+    </div>
+{% endblock body %}

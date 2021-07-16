@@ -1,0 +1,40 @@
+<h4>Коментарии к книге <b><em> {{ object.name }} </em></b>:</h4>
+{% for comment in comments %}
+    <div class="comment border rounded row" >
+        <div class="comment_data col-3 border-end" >
+            <b><em>{{ comment.author }}</em></b>
+            
+            
+        </div>
+
+        <div class="comment col-9" >
+            {{ comment.text }}
+            <div class="text-end" style="font-size: 0.7rem;">{{ comment.created }}</div>
+        </div>
+    </div> 
+    
+    
+{% endfor %}
+<br class="mt-5">
+{% if request.user.is_authenticated %}
+    <div class="createcomment"   style="padding: 0 0 0 0;"  >
+        
+        <form action="{% url 'comments:create' %}" method="POST" style="padding: 0 0 0 0;">  
+            <div class="comment " >
+                
+                    {% csrf_token %}
+                    <div class="form-floating">
+                        <input type="hidden" name="object_id" value="{{ object.pk }}">
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <input type="hidden" name="ct_id" value="{{ ct_id }}">
+                        <textarea class="form-control"  id="comment" style="height: 100px" name="comment_text"></textarea>
+                        <label style="color: gray;" for="comment">{{ request.user }}, тут можно оставить отзыв!</label>
+                    </div>
+                
+            </div>
+            
+            <button type="submit" class="w-100 btn btn-sm btn-outline-success">Отправить</button>
+        </form> 
+    </div>
+   
+{% endif %}

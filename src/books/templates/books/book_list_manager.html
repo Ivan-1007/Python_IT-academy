@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+Books
+{% endblock title %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class=" mb-3">
+        <div class="p-2  fs-3">Книги:</div> 
+        <hr> 
+        <div class="justify-content-end">
+            <form action="{% url 'books:import_CSV' %}" method="post" enctype="multipart/form-data" class="row justify-content-end">
+                {% csrf_token %}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <input type="file" name="csv_file" class="form-control" id="customFile" accept=".csv, text/csv" />
+                    <input type="hidden" name="next" value="{{ request.path }}"/>
+                </div>
+                <button class=" btn btn-outline-success col-lg-2 col-md-4 col-sm-12" style="display: inline;" type="submit">Загрузить CSV файл</button>
+            </form>
+        </div>
+    </div>
+    <hr>  
+    <table class="table table-striped  ">
+        <thead>
+            <tr>
+                <td class="text-center"><b>№</b></td>
+                <td class="text-center"><b>Название</b></td>
+                <td class="text-center"><b>Цена(BYN)</b></td>
+                <td class="text-center"><b>В наличии</b></td>
+                <td class="text-center"><b>Доступно для заказа</b></td>
+                <td class="text-center"><b>Обновлено</b></td>
+                <td class="text-center"><b><a class="w-50 btn btn-outline-success justify-content-end text-decoration-none" href="{% url 'books:create' %}">Добавить</a></b></td>
+                
+                
+            </tr>
+          </thead>
+        <tbody>
+            {% for item in object_list %}
+                <tr>
+                    <td class="text-center">{{forloop.counter}}</th>
+                    <td class="text-center"><a class="text-decoration-none text-reset txt-overflow" href="{% url 'books:book' item.pk %}">{{ item.name }}</a></td>
+                    <td class="text-center">{{ item.price }}</td>
+                    <td class="text-center">{{ item.in_stock }}</td>
+                    <td class="text-center">{{ item.available}}</td>
+                    <td class="text-center">{{ item.updated }}</td>
+                    <td class="text-end">
+                        <a class=" btn btn-outline-secondary justify-content-end text-decoration-none " href="{% url 'books:update' item.pk %}">Изменить</a>
+                        <a class=" btn btn-outline-danger justify-content-end text-decoration-none " href="{% url 'books:del' item.pk %}">Удалить</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include 'pagination.html' %}
+
+
+
+
+        
+    </div>
+    <br>
+
+</div>
+{% endblock body %}

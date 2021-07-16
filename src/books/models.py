@@ -1,6 +1,8 @@
 from django.db import models
+from comments.models import Comment
 from directories import models as dirs_models
 from django.urls import reverse
+from django.contrib.contenttypes.fields import GenericRelation
 
 # Create your models here.
 
@@ -26,7 +28,7 @@ class Book(models.Model):
 
     name = models.CharField(verbose_name='Имя', max_length=60, )
     discription = models.TextField(verbose_name='Описание', blank=True, null=True,)
-    picture = models.ImageField(verbose_name='Изображение', upload_to=book_directory_path, blank=True, default='Books/book0')
+    picture = models.ImageField(verbose_name='Изображение', upload_to=book_directory_path, blank=True, default='books/book0')
     price = models.FloatField(verbose_name='цена (BYN)')
     authors = models.ManyToManyField(to=dirs_models.Author, related_name='books')          # Автор
     series = models.ForeignKey(to=dirs_models.Series, verbose_name='серия', related_name='books', blank=True, null=True, on_delete=models.PROTECT)  # Серии
@@ -44,10 +46,11 @@ class Book(models.Model):
     rating = models.FloatField(verbose_name='рейтинг', blank=True, null=True,)
     created = models.DateTimeField(verbose_name = "Дата внесения в каталог", auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(verbose_name = "Дата последнего редактирования в БД", auto_now=True, auto_now_add=False)
+    
 
 
     def __str__(self) -> str: 
-        return f'{self.name}, {self.authors}'
+        return f'{self.name}'
     
     def get_absolute_url(self):
         return reverse('books:book', args=[self.pk])   #  можно так  bookshop:author, args=[self.pk]

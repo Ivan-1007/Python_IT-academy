@@ -32,6 +32,10 @@ urlpatterns = [
     path('directories/', include('directories.urls', namespace='dirs')),
     path('books/', include('books.urls', namespace='books')),
     path('users/', include('users.urls', namespace='users')),
+    path('carts/', include('carts.urls', namespace='carts')),
+    path('orders/', include('orders.urls', namespace='orders')),
+    path('search/', include('search.urls', namespace='search')),
+    path('comments/', include('comments.urls', namespace='comments')),
     path('', redirect_to_books, name='main'),
 
 ] 

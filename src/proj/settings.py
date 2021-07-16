@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     'directories',
     'books',
     'users',
+    'carts',
+    'orders',
+    'search',
+    'comments',
 ]
 
 MIDDLEWARE = [

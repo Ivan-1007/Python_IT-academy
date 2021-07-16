@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load comments_tags %}
 
 {% block title %}
     {{object.name}}
@@ -9,10 +10,13 @@
     
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">    
-                <img class="rounded mx-auto d-block img-thumbnail img-fluid"  src="{{ object.picture.url }}" alt="book_pict"> <br>
+                <img class="rounded mx-auto d-block img-thumbnail img-fluid"  src="{{ object.picture.url }}" alt="book_pict">
+                <hr>
+                <a class="w-100 btn btn-success" href="#">Добавить в корзину</a>
             </div>        
+
             <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
-                <h2><b>id:</b> <em> {{ object.pk }} </em> | <b>name:</b> <em> {{ object.name }}({{object.pyblishing_year}}) </em> </h2>
+                <h2><b>name:</b> <em> {{ object.name }}({{object.pyblishing_year}}) </em>   </h2>
                 <p><b>Описание:</b><br>    
                 {{ object.discription }} <br>
                 <b>Серия:</b> {{ object.series.name }} <br>                
@@ -25,8 +29,6 @@
                 <b>Рейтинг: </b> {{ object.rating }} <br>
 
                 </p>
-                <a class=" btn btn-outline-secondary justify-content-end text-decoration-none " href="{% url 'books:update' object.pk %}">Изменить</a>
-                <a class=" btn btn-outline-danger justify-content-end text-decoration-none " href="{% url 'books:del' object.pk %}">Удалить</a>
             </div>
      
         </div>
@@ -50,6 +52,10 @@
 
         <div>
             <p class="text-end text-down"> Последнее обновление: {{ object.updated|date:'d-m-y H:i:s' }}</p>
+        </div>
+
+        <div class="comments  col-lg-8 col-sm-12 ">
+            {% show_comments %}
         </div>
     </div>
 {% endblock body %}

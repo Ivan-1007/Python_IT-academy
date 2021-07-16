@@ -1,17 +1,46 @@
+
+
+.wrap {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrap img {
+    height: 400px;
+    width: auto;
+}
+
+.dir_wrap {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dir_wrap img {
+    height: 250px;
+    width: auto;
+}
+
+
 .txt-overflow {
     overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
+.padding-01 {
+    padding: 0.1rem 0.1rem;
+}
+
 .list-group-item {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+    padding: .3rem .1rem;
 }
 
 .card .pict {
-    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
@@ -23,18 +52,12 @@
     transform: scale(0.9);
 }
 
-.card .pict-wrap {
-    margin-top: 100%;
-    overflow: hidden;
-    
-}
 
-
-.card .pict-wrap-book {
-    margin-top: 140%;
+/* .card .pict-wrap-book {
+    margin-top: 130%;
     overflow: hidden; 
     
-}
+} */
 
 .card .price-label {
     position: absolute;
@@ -67,4 +90,20 @@
     -webkit-tap-highlight-color: transparent;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+}
+
+.table-button tr td{
+    width:15%;
+}
+
+/* pagination */
+.page-link {
+    color: #198754;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
 }

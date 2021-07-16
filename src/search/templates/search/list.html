@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load book_filter_tags %}
+
+{% block title %}
+    Поиск
+{% endblock title %}  
+
+{% block body %}
+    <p><b>Книги:</b></p>
+    <hr>
+    {% if books %}   
+        <div class="books container">
+            {% for book in books %}
+                {% include 'book_card.html' %}
+            {% endfor %}
+        </div>
+    {% else %}
+        Книг не найдено!
+    {% endif %}   
+    
+
+    <p class="mt-3"><b>Авторы:</b></p>
+    <hr>
+    {% if authors %} 
+        <div class="authors container">
+            {% for item in authors %}
+                {% include 'directories_item.html' %}
+            
+            {% endfor %}
+        </div>
+    {% else %}
+        Авторов не найдено!
+    {% endif %}
+
+
+
+{% endblock body %}

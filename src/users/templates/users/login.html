@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+    <link href="{% static 'css/users.css' %}" rel="stylesheet">
     <title> Авторизация</title>
 </head>
 
@@ -17,15 +17,14 @@
             <h1 class="h3 mb-3 fw-normal">Авторизация
     
                 {% if form.errors %}
-                    <p>Your username and password didn't match. Please try again.</p>
+                    <p>Ваше имя пользователя или пароль не совпадают. Попробуйте еще раз.</p>
                 {% endif %}
 
                 {% if next %}
                     {% if user.is_authenticated %}
-                    <p>Your account doesn't have access to this page. To proceed,
-                    please login with an account that has access.</p>
+                    <p>Ваш аккаунт не имеет доступа к этой странице.</p>
                     {% else %}
-                    <p>Please login to see this page.</p>
+                    <p>Зарегистрируйтесь чтобы просматривать это страницу.</p>
                     {% endif %}
                 {% endif %}
             </h1>
@@ -34,20 +33,10 @@
                 {{ form|crispy }}
             </div>
 
-            
-
             <input type="hidden" name="next" value="{{ next }}">
 
-            <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Sign in</button>
-
-        
-
-
-
-
-
-        
-
+            <button class="w-100 btn btn-lg btn-outline-primary" type="submit">Войти</button>
+            <a class="w-100 btn btn-lg btn-outline-success mt-2" href="{% url 'users:registration' %}">Зарегистрироваться</a>
 
         </form>
     </main>

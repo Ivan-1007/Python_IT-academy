@@ -12,6 +12,21 @@
     
     {% include './header.html' %}
 
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            {% if message.level == 30 %}
+                <div class="alert alert-danger" role="alert">
+            {% else %}
+                <div class="alert alert-success" role="alert">    
+            {% endif %}
+                    {{ message }}
+                </div>
+
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     {% block body %}Here will be Body{% endblock body %}
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>

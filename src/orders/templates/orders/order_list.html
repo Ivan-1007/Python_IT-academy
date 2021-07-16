@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Ваши заказы
+{% endblock title %}    
+
+{% block body %}
+    <div class="container-fluid col col-lg-6 col-md-8">
+        Ваши заказы:
+        <table class="table table-striped">
+            <tr>
+                <td>
+                    <b> № </b> 
+                </td>
+                <td>
+                    <b> Книга(и) </b>
+                </td>
+                <td>
+                    <b> Цена заказа </b>
+                </td>
+                <td>
+                    <b> Дата оформления </b>
+                </td>
+                <td>
+                    <b> Статус: </b>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            {% for order in object_list %}
+            
+                <tr>
+                    <td>
+                        {{forloop.counter}}
+                    </td>
+                    <td>
+                        <ul>
+                            {% for book in order.cart.books_in_cart.all %}
+                                <li>
+                                    {{forloop.counter}}. {{book.book.name}} - {{book.quantity}}шт.
+                                </li>                                
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        {{ order.cart.cart_price }}
+                    </td>
+                    <td>
+                        {{ order.created|date:'d-m-y H:i' }}
+                    </td>
+                    <td>
+                        {{order.status}}
+                        
+                    </td>
+                    <td>
+                        <form action="{% url 'orders:cancel' order.pk %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn-sm btn btn-outline-danger">Отменить</button>
+                        </form>
+                        <a class="btn-sm btn btn-outline-secondary" href="{% url 'orders:comment' order.pk %}">Комментарии</a>
+                    </td>
+                </tr>
+            
+            {% endfor %}
+        </table>        
+            
+    </div>
+{% endblock body %}

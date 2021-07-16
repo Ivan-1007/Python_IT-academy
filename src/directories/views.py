@@ -4,6 +4,7 @@ from .models import *
 from . import forms 
 from django.views.generic import UpdateView, ListView, DetailView, CreateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 
@@ -12,10 +13,11 @@ from django.urls import reverse_lazy
 #     template_name = 'bookshop/index.html'
 
 # Genre (CRUDL)
-class AuthorCreate(CreateView):
+class AuthorCreate(CreateView, PermissionRequiredMixin):
     model = Author
     form_class = forms.AuthorForm
     template_name = 'directories/dir_item_form.html'
+    permission_required = 'books.add_book'
 
     def get_context_data(self, **kwargs):
         cnt = super().get_context_data(**kwargs)

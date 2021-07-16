@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Оформление заказа
+{% endblock title %}    
+
+{% block body %}
+    <div class="container-fluid col col-lg-6 col-md-8">
+        Оформление заказа:
+        <table class="table table-striped  ">
+            <thead>
+                <tr>
+                    <td class="text-center"><b>№</b></td>
+                    <td class="text-center"><b>Книга</b></td>
+                    <td class="text-center"><b>Цена за шт.(BYN)</b></td>
+                    <td class="text-center"><b>Количество</b></td>
+                    <td class="text-center"><b>Цена всей позиции(BYN)</b></td>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in object.books_in_cart.all %}
+                <tr>
+                    <td class="text-center">{{forloop.counter}}</th>
+                    <td class="text-center"><a class="text-decoration-none text-reset txt-overflow" href="{% url 'books:book' book.book.pk %}">{{ book.book.name }}</a></td>
+                    <td class="text-center">{{ book.unit_price }}</td>
+                    <td class="text-center">{{ book.quantity }}</td>
+                    <td class="text-center">{{ book.total_price }}</td>
+                </tr>
+            {% endfor %}
+                
+                <tr style="border: 2px black solid">
+                    <td colspan='4' class="text-end"><b>Общая стоимость:</b></td>
+                    <td class="text-center"><b>{{ object.cart_price }}</b></td>
+                    
+                </tr>
+            </tbody>
+            
+        </table> 
+        
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy  }}
+            <button class="w-100 btn btn-outline-success" value="checkout" name="submit" type="submit">Оформить заказ</button>
+        </form>
+
+            
+    </div>
+{% endblock body %}

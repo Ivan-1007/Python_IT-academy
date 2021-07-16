@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Заказы
+{% endblock title %}    
+
+{% block body %}
+    <div class="container-fluid col col-lg-8 col-md-10">
+        <div>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'orders:m_list' %}">Все</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'orders:m_list' %}?status=1">Новый</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'orders:m_list' %}?status=2">В обработке</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'orders:m_list' %}?status=3">В пути</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'orders:m_list' %}?status=4">Доставлен</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'orders:m_list' %}?status=5">Оплачен</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'orders:m_list' %}?status=6">Отменен</a>
+        </div>
+        <hr>
+
+        <table class="table table-striped">
+            <tr>
+                <td>
+                    <b> ID </b> 
+                </td>
+                <td>
+                    <b> Книга(и) </b>
+                </td>
+                <td>
+                    <b> Цена заказа </b>
+                </td>
+                <td>
+                    <b> Дата оформления </b>
+                </td>
+                <td>
+                    <b> Статус: </b>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+            {% for order in object_list %}
+            
+                <tr>
+                    <td>
+                        {{ order.pk }}
+                    </td>
+                    <td>
+                        <ul>
+                            {% for book in order.cart.books_in_cart.all %}
+                                <li>
+                                    {{forloop.counter}}. {{book.book.name}} - {{book.quantity}}шт.
+                                </li>                                
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        {{ order.cart.cart_price }}
+                    </td>
+                    <td>
+                        {{ order.created|date:'d-m-y H:i' }}
+                    </td>
+                    <td>
+                        {{order.status}}
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-secondary" href="{% url 'orders:update' order.pk %}">Изменить</a>
+                        <a class="btn-sm btn btn-outline-secondary" href="{% url 'orders:comment' order.pk %}">Комментарии</a>
+                    </td>
+                </tr>
+            
+            {% endfor %}
+        </table>        
+            
+    </div>
+{% endblock body %}

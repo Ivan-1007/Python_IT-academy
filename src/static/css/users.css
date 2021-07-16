@@ -39,3 +39,10 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.form-register {
+  padding: 15px;
+  margin: auto;
+  border: grey solid 1px;
+  border-radius: 5%;
+}

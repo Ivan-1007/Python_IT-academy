@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{object.name}}
+{% endblock title %}   
+
+{% block body %}
+    <div class="container-fluid">
+    
+        <div class="row d-flex justify-content-center">  
+            <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+                <div class="d-flex bd-highlight mb-3">
+                    <div class="p-2 bd-highlight fs-4">Пользователь: {{ object.user.username }} ({{object.user.groups.all.0}}
+                        )</div> 
+                    <div class="ms-auto p-2 bd-highlight"><a class=" btn btn-outline-secondary justify-content-end text-decoration-none" href="{% url 'users:update' object.pk  %}">Редактировать</a></div>  
+                </div>
+                <hr>
+                <table class="table table-striped">
+                    <tr>
+                        <td>Имя:</td>
+                        <td>{% if object.user.first_name %} {{object.user.first_name}} {% else %} Не установлено {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия:</td>
+                        <td>{% if object.user.last_name %} {{object.user.last_name}} {% else %} Не установлено {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{ object.user.email }} </td>
+                    </tr>
+                    <tr>
+                        <td>Номер телефона:</td>
+                        <td>{{object.phonenumber}}</td>
+                    </tr>
+                    <tr>
+                        <td>Адрес1:</td>
+                        <td>{% if object.user.country and object.user.city and object.user.adress_1 %} {{object.country}}, г.{{object.city}}, {{object.adress_1}} {% else%} Не установлено {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Адрес2:</td>
+                        <td>{% if object.user.country and object.user.city and object.user.adress_2 %} {{object.country}}, г.{{object.city}}, {{object.adress_2}} {% else%} Не установлено {% endif %}</td>
+                    </tr>
+                    <tr>
+                      <td>Почтовый индекс:</td>
+                          <td>{% if object.user.postcode %} {{object.postcode}} {% else%} Не установлено {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>Доп информация:</td>
+                            <td>{% if object.user.information %} {{object.information}} {% else%} Не установлено {% endif %}</td>
+                      </tr>
+
+                </table>
+                
+            </div>
+     
+        </div>
+{% endblock body %}

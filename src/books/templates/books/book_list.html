@@ -12,35 +12,18 @@ Books
     </div>
     <hr>  
     <div class="row">
-        {% for item in object_list %}
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 g-4">
-                <div class="card " >
-                    <div class="pict-wrap-book">
-                        <a href="{% url 'books:book' item.pk %}">
-                        <img src="{{ item.picture.url }}" class="card-img-top rounded pict "  alt="">
-                        </a>    
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><h4><a class="text-decoration-none text-reset txt-overflow name link-hover" href="{% url 'books:book' item.pk %}">{{ item.name }}</a></h4></li>
-                        <li class="list-group-item txt-overflow"><span class="fs-6">Автор(ы):</span>                                    
-                            {% for author in item.authors.all %}
-                                <a class="text-decoration-none text-reset  fs-6 link-hover" href="{% url 'dirs:author' author.pk %}"> {{author.name}} </a>
-                            {% endfor %}
-
-                            
-                        <li class="list-group-item">Рейтинг: {{ item.rating }} </li>
-                    </ul>
-                    <div class="price-label">{{ item.price }}BYN</div>
-                    
-                </div>        
-            </div>
-
-
-
-
+        {% for book in object_list %}
+            {% include 'book_card.html' %}
         {% endfor %}
     </div>
     <br>
 
 </div>
+
+{% include 'pagination.html' %}
+
+
+
+
 {% endblock body %}
+
