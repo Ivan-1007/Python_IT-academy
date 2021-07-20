@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http.response import HttpResponseRedirect
 from django.views.generic.detail import DetailView
 from .models import Order, OrderStatus
-from django.views.generic import FormView, ListView, UpdateView, RedirectView
+from django.views.generic import FormView, ListView, UpdateView, RedirectView, TemplateView
 from .forms import OrderForm, OrderManagerForm
 from carts.models import Cart
 from django.urls.base import reverse_lazy
@@ -105,3 +105,4 @@ class CancelOrderView(RedirectView):
 
 class CommentOrderView(DetailView):
     template_name = 'orders/comment.html'
+    model = Order
